@@ -21,5 +21,7 @@ public class CompanyController {
 		CompanyDto createdCompany = companyService.createCompany(request);
 		return ResponseEntity.ok(createdCompany);
 	}
+
+
 	
 }
