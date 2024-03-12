@@ -16,16 +16,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CompanyDto {
 	
-	
+		private UUID id;
 		private String companyName;
 		private String cityName;
 		private String address;
 		private String phoneNumber;
 		private String GSTNumber;
 		private String PANNumber;
-		private String companyImage;		
-		private UUID user;
-		private CompanyRole companyRole;
+		private UUID owner;
+		private boolean companyIsNotPresent;
+
+
+
 
 
 
