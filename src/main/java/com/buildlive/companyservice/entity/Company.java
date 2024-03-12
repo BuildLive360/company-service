@@ -24,9 +24,7 @@ import org.hibernate.annotations.Type;
 
 @Data
 @Entity
-@Table
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class Company {
@@ -58,6 +56,8 @@ public class Company {
 	
 	@Enumerated(EnumType.STRING)
 	private CompanyRole companyRole;
+
+	private boolean companyIsNotPresent = true;
 	
 	@ToString.Exclude
 	@OneToMany(mappedBy = "company",cascade = CascadeType.ALL,orphanRemoval = true)
