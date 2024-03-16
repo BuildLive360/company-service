@@ -1,15 +1,12 @@
 package com.buildlive.companyservice.service.impl;
 
-import com.buildlive.companyservice.entity.CompanyRole;
+import com.buildlive.companyservice.entity.enums.CompanyRole;
 import com.buildlive.companyservice.repo.CompanyRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.buildlive.companyservice.dto.CompanyDto;
-import com.buildlive.companyservice.entity.Company;
+import com.buildlive.companyservice.entity.company.Company;
 import com.buildlive.companyservice.service.CompanyService;
 
 import java.util.List;

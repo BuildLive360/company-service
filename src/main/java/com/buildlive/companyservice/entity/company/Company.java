@@ -1,28 +1,17 @@
-package com.buildlive.companyservice.entity;
+package com.buildlive.companyservice.entity.company;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
+import com.buildlive.companyservice.entity.BankAccount;
+import com.buildlive.companyservice.entity.enums.CompanyRole;
+import com.buildlive.companyservice.entity.library.Party;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Builder
 @NoArgsConstructor
@@ -59,8 +48,13 @@ public class Company {
 
 	private boolean companyIsNotPresent = true;
 	
-	@ToString.Exclude
+
 	@OneToMany(mappedBy = "company",cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<BankAccount> accounts = new ArrayList<>();
+
+
+	@OneToOne
+	@JoinColumn(name = "party_id")
+	private Party party;
 
 }

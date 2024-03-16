@@ -1,4 +1,4 @@
-package com.buildlive.companyservice.entity;
+package com.buildlive.companyservice.entity.enums;
 
 public enum CompanyRole {
 	

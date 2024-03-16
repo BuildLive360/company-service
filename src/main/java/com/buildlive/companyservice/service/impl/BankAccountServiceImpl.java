@@ -3,7 +3,7 @@ package com.buildlive.companyservice.service.impl;
 import com.buildlive.companyservice.dto.BankDto;
 import com.buildlive.companyservice.entity.AccountType;
 import com.buildlive.companyservice.entity.BankAccount;
-import com.buildlive.companyservice.entity.Company;
+import com.buildlive.companyservice.entity.company.Company;
 import com.buildlive.companyservice.repo.BankAccountRepository;
 import com.buildlive.companyservice.repo.CompanyRepository;
 import com.buildlive.companyservice.service.BankAccountService;

@@ -2,6 +2,7 @@ package com.buildlive.companyservice.entity;
 
 import java.util.UUID;
 
+import com.buildlive.companyservice.entity.company.Company;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
