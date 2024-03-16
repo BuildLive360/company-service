@@ -7,7 +7,7 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.buildlive.companyservice.entity.Company;
+import com.buildlive.companyservice.entity.company.Company;
 
 @Repository
 public interface CompanyRepository extends JpaRepository<Company, UUID> {

@@ -1,6 +1,6 @@
 package com.buildlive.companyservice.dto;
 
-import com.buildlive.companyservice.entity.Company;
+import com.buildlive.companyservice.entity.company.Company;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

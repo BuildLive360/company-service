@@ -1,8 +1,9 @@
 package com.buildlive.companyservice.controller;
 
 import com.buildlive.companyservice.dto.BankDto;
+import com.buildlive.companyservice.dto.CompanyMapper;
 import com.buildlive.companyservice.dto.CompanyRequest;
-import com.buildlive.companyservice.entity.Company;
+import com.buildlive.companyservice.entity.company.Company;
 import com.buildlive.companyservice.service.BankAccountService;
 import com.buildlive.companyservice.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import com.buildlive.companyservice.dto.CompanyDto;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/company")
@@ -47,9 +49,14 @@ public class CompanyController {
 	}
 
 	@PostMapping ("/findall")
-	public ResponseEntity<List<Company>> getAllCompany(@RequestBody CompanyRequest userIdRequest){
+	public ResponseEntity<List<CompanyDto>> getAllCompany(@RequestBody CompanyRequest userIdRequest){
 		UUID userId = userIdRequest.getUserId();
-		return new ResponseEntity<>(companyService.getAllByUser(userId),HttpStatus.OK);
+		System.out.println(companyService.getAllByUser(userId));
+		List<Company> companies = companyService.getAllByUser(userId);
+		List<CompanyDto> dtos = companies.stream()
+				.map(CompanyMapper::mapToDto)
+				.collect(Collectors.toList());
+		return new ResponseEntity<>(dtos,HttpStatus.OK);
 	}
 
 

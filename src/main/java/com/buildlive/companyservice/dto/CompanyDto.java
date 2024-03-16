@@ -3,8 +3,6 @@ package com.buildlive.companyservice.dto;
 
 import java.util.UUID;
 
-import com.buildlive.companyservice.entity.CompanyRole;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,7 +1,6 @@
 package com.buildlive.companyservice.service;
 
-import com.buildlive.companyservice.entity.Company;
-import org.springframework.http.ResponseEntity;
+import com.buildlive.companyservice.entity.company.Company;
 
 import com.buildlive.companyservice.dto.CompanyDto;
 
