@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class PartyResponse {
 
     public String message;
+    private int status;
 }
