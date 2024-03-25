@@ -2,13 +2,16 @@ package com.buildlive.companyservice.controller;
 
 import com.buildlive.companyservice.dto.PartyDto;
 import com.buildlive.companyservice.dto.PartyResponse;
-import com.buildlive.companyservice.entity.library.Party;
+import com.buildlive.companyservice.dto.PartyRetrieval;
 import com.buildlive.companyservice.service.PartyService;
 import com.buildlive.companyservice.service.impl.PartyServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,6 +33,19 @@ public class PartyController {
     public ResponseEntity<Boolean> checkMethod(@RequestBody PartyDto partyDto){
         return ResponseEntity.ok(service.checkMethod(partyDto.getParty_email(),partyDto.getCompany_id()));
     }
+
+    @GetMapping("/{company-id}/partyMembers")
+    public ResponseEntity<List<PartyRetrieval>> getAllPartyMembersOfCompany(
+                                  @PathVariable("company-id")UUID companyId
+                                                                           )
+    {
+        System.out.println("1 coming");
+
+        return partyService.getAllPartyMembersOfCompany(companyId);
+
+    }
+
+
 
 
 }

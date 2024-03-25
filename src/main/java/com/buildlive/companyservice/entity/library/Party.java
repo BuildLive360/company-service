@@ -1,6 +1,7 @@
 package com.buildlive.companyservice.entity.library;
 
 import com.buildlive.companyservice.entity.company.Company;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,7 +21,8 @@ public class Party {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @OneToMany(mappedBy = "party")
+    @OneToMany(mappedBy = "party",cascade = CascadeType.ALL,orphanRemoval = true)
+    @JsonManagedReference
     private List<PartyMember> members = new ArrayList<>();
 
     @OneToOne

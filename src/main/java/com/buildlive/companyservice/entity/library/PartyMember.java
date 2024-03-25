@@ -1,6 +1,7 @@
 package com.buildlive.companyservice.entity.library;
 
 import com.buildlive.companyservice.entity.enums.PartyType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,6 +26,7 @@ public class PartyMember {
     private PartyType partyType;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "party_id")
     private Party party;
 

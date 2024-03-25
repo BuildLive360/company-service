@@ -2,6 +2,7 @@ package com.buildlive.companyservice.service.impl;
 
 import com.buildlive.companyservice.dto.PartyDto;
 import com.buildlive.companyservice.dto.PartyResponse;
+import com.buildlive.companyservice.dto.PartyRetrieval;
 import com.buildlive.companyservice.entity.company.Company;
 import com.buildlive.companyservice.entity.library.Party;
 import com.buildlive.companyservice.entity.library.PartyMember;
@@ -13,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -112,44 +115,37 @@ public class PartyServiceImpl  implements PartyService {
         return isPartyMemberExistsInCompany(id,email);
     }
 
+    @Override
+    public ResponseEntity<List<PartyRetrieval>> getAllPartyMembersOfCompany(UUID companyId) {
+        System.out.println(companyId);
+        Optional<Company> optionalCompany = companyRepository.findById(companyId);
+        PartyRetrieval partyRetrieval = new PartyRetrieval();
+        if (optionalCompany.isPresent()){
+            Company company = optionalCompany.get();
+            System.out.println(company);
+            Party party = company.getParty();
+
+            if(party != null) {
+                System.out.println("com 3");
+                //                partyRetrieval.setPartyMembers(partyMembers);
+                System.out.println(party.getMembers());
+                return ResponseEntity.ok(Collections.singletonList(PartyRetrieval.builder()
+                        .partyMembers(party.getMembers()).build()));
+            }
+            else {
+               throw  new ResponseStatusException(HttpStatus.NO_CONTENT,"NO parties Found");
+            }
+
+        }
+        else {
+            System.out.println("No company");
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT);
+        }
+    }
 
 
 
-//    public boolean isPartyMemberExistsInCompany(UUID companyId, String partyMemberEmail) {
-//        Optional<Company> optionalCompany = companyRepository.findById(companyId);
-//
-//        if (optionalCompany.isPresent()) {
-//            Company company = optionalCompany.get();
-//            Optional<Party> optionalParty = partyRepository.findByCompany(company);
-//
-//            if(optionalParty.isPresent()){
-//                Party party = optionalParty.get();
-//                List<PartyMember> members = partyMemberRepository.findByParty(party);
-//                for(PartyMember member:members){
-//                    if(member.getParty_email().equals(partyMemberEmail)) {
-//                        System.out.println("coming here " + member.getParty());
-//                        return true;
-//                    }
-//
-//                }
-//
-//            }
-//            else {
-//                System.out.println("here");
-//                return false;
-//            }
-//
-//        }
-//        else {
-//            System.out.println("no company");
-//            return false;
-//        }
-//
-//        return false; // If company or party doesn't exist, or party member is not found, return false
-//    }
-
-
-    public boolean isPartyMemberExistsInCompany(UUID companyId, String partyMemberEmail) {
+    private boolean isPartyMemberExistsInCompany(UUID companyId, String partyMemberEmail) {
         Optional<Company> optionalCompany = companyRepository.findById(companyId);
 
         if (optionalCompany.isEmpty()) {
