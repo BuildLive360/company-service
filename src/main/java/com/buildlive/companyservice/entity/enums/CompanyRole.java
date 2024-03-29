@@ -4,6 +4,8 @@ public enum CompanyRole {
 	
 	OWNER,
 	PROJECT_MANAGER,
-	SITE_ENGINEER
+	SITE_ENGINEER,
+	CLIENT,
+	VENDOR
 
 }

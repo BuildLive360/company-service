@@ -6,6 +6,7 @@ import com.buildlive.companyservice.dto.CompanyRequest;
 import com.buildlive.companyservice.entity.company.Company;
 import com.buildlive.companyservice.service.BankAccountService;
 import com.buildlive.companyservice.service.CompanyService;
+import com.buildlive.companyservice.service.PartyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,9 @@ public class CompanyController {
 
 	@Autowired
 	CompanyService companyService;
+
+	@Autowired
+	PartyService partyService;
 	@Autowired
 	BankAccountService bankAccountService;
 
@@ -57,6 +61,12 @@ public class CompanyController {
 				.map(CompanyMapper::mapToDto)
 				.collect(Collectors.toList());
 		return new ResponseEntity<>(dtos,HttpStatus.OK);
+	}
+
+	@GetMapping("/find-other-companies")
+	public ResponseEntity<List<CompanyDto>> findOtherCompaniesOfUser(@RequestParam(name = "userEmail") String userEmail){
+		System.out.println(userEmail);
+		return companyService.findOtherCompanies(userEmail);
 	}
 
 
