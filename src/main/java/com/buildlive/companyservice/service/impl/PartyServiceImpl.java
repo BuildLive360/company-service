@@ -16,10 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class PartyServiceImpl  implements PartyService {
@@ -76,6 +73,7 @@ public class PartyServiceImpl  implements PartyService {
                             .party_email(partydto.getParty_email())
                             .party_phone(partydto.getParty_phone())
                             .partyType(partydto.getPartyType())
+                            .companyRole(partydto.getCompanyRole())
                             .party(party)
                             .build();
 
@@ -145,6 +143,7 @@ public class PartyServiceImpl  implements PartyService {
 
 
 
+
     private boolean isPartyMemberExistsInCompany(UUID companyId, String partyMemberEmail) {
         Optional<Company> optionalCompany = companyRepository.findById(companyId);
 
@@ -173,6 +172,62 @@ public class PartyServiceImpl  implements PartyService {
         }
 
         return exists;
+    }
+
+
+    @Override
+//    public ResponseEntity<List<Company>> getOtherCompaniesOfUser(String email) {
+//        List<Company> companyList = new ArrayList<>();
+//       Optional<PartyMember>optionalPartyMember =  partyMemberRepository.findByPartyEmail(email);
+//        System.out.println(optionalPartyMember.isPresent());
+//       if(optionalPartyMember.isPresent()){
+//           PartyMember member = optionalPartyMember.get();
+//           UUID partyId = member.getParty().getId();
+//           Optional<Party> optionalParty = partyRepository.findById(partyId);
+//           if(optionalParty.isPresent()){
+//               Party party = optionalParty.get();
+//               Company company = party.getCompany();
+//               companyList.add(company);
+//               System.out.println(companyList+"kjhgkfjsgksdfn");
+//           }
+//       }
+//       return ResponseEntity.ok(companyList);
+//    }
+
+
+
+    public ResponseEntity<List<Company>> getOtherCompaniesOfUser(String email) {
+        List<Company> companyList = new ArrayList<>();
+
+        // Find the PartyMember associated with the provided email
+        Optional<PartyMember> optionalPartyMember = partyMemberRepository.findByPartyEmail(email);
+
+        if (optionalPartyMember.isPresent()) {
+            PartyMember member = optionalPartyMember.get();
+            Party party = member.getParty();
+
+            if (party != null) {
+                // Get the party's associated company, if any
+                Company company = party.getCompany();
+
+                if (company != null) {
+                    // Add the company to the list
+                    companyList.add(company);
+                } else {
+                    // Handle case where party doesn't have a company
+                    return ResponseEntity.notFound().build();
+                }
+            } else {
+                // Handle case where party is not found
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            // Handle case where PartyMember with the provided email is not found
+            return ResponseEntity.notFound().build();
+        }
+
+        // Return the list of companies associated with the user's email
+        return ResponseEntity.ok(companyList);
     }
 
 

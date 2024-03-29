@@ -11,5 +11,5 @@ import java.util.UUID;
 @Repository
 public interface PartyRepository extends JpaRepository<Party, UUID> {
 
-    Optional<Party> findByCompany(Company company);
+//    Optional<Party> findByCompany(Company company);
 }

@@ -4,6 +4,8 @@ import com.buildlive.companyservice.entity.company.Company;
 import com.buildlive.companyservice.entity.library.Party;
 import com.buildlive.companyservice.entity.library.PartyMember;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,5 +30,7 @@ public interface PartyMemberRepository extends JpaRepository<PartyMember, UUID> 
     List<PartyMember> findByParty(Party party);
 
 
+    @Query("SELECT pm FROM PartyMember pm WHERE pm.party_email = :email")
+    Optional<PartyMember> findByPartyEmail(@Param("email") String email);
 }
 

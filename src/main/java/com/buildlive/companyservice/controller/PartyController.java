@@ -42,7 +42,6 @@ public class PartyController {
         System.out.println("1 coming");
 
         return partyService.getAllPartyMembersOfCompany(companyId);
-
     }
 
 
