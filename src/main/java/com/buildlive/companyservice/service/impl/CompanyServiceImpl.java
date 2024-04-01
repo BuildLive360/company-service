@@ -3,6 +3,8 @@ package com.buildlive.companyservice.service.impl;
 import com.buildlive.companyservice.entity.enums.CompanyRole;
 import com.buildlive.companyservice.repo.CompanyRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.buildlive.companyservice.dto.CompanyDto;
@@ -12,6 +14,7 @@ import com.buildlive.companyservice.service.CompanyService;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +23,8 @@ public class CompanyServiceImpl implements CompanyService {
 
 
 	private final CompanyRepository companyRepository;
+	private final ModelMapper modelMapper;
+
 
 
 
@@ -70,6 +75,18 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyRepository.getByOwner(id);
 	}
 
+	@Override
+	public ResponseEntity<List<CompanyDto>> findOtherCompanies(String email) {
+		List<Company> companies = companyRepository.findByPartyMemberEmail(email);
+
+		List<CompanyDto> companyDto = companies.stream()
+				.map(this::companyDto)
+				.collect(Collectors.toList());
+
+		return ResponseEntity.ok(companyDto);
+	}
+
+
 
 	private Company mapToCompany(CompanyDto request){
 		return Company.builder()
@@ -97,6 +114,10 @@ public class CompanyServiceImpl implements CompanyService {
 				.owner(company.getOwner())
 //				.companyRole(company.getCompanyRole())
 				.build();
+	}
+
+	private CompanyDto companyDto(Company company){
+		return modelMapper.map(company,CompanyDto.class);
 	}
 
 }
