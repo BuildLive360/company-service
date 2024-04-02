@@ -63,5 +63,11 @@ public class CompanyController {
 		return new ResponseEntity<>(dtos,HttpStatus.OK);
 	}
 
+	@GetMapping("/find-other-companies")
+	public ResponseEntity<List<CompanyDto>> findOtherCompaniesOfUser(@RequestParam(name = "userEmail") String userEmail){
+		System.out.println(userEmail);
+		return companyService.findOtherCompanies(userEmail);
+	}
+
 
 }

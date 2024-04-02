@@ -5,6 +5,7 @@ import com.buildlive.companyservice.entity.company.Company;
 import com.buildlive.companyservice.entity.enums.CompanyRole;
 import com.buildlive.companyservice.repo.CompanyRepository;
 import com.buildlive.companyservice.service.CompanyService;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class CompanyServiceImpl implements CompanyService {
 
 	
 
-	private final CompanyRepository companyRepository;
+
 	private final ModelMapper modelMapper;
 
 	@Autowired
@@ -106,8 +107,6 @@ public class CompanyServiceImpl implements CompanyService {
 		List<CompanyDto> companyDto = companies.stream()
 				.map(this::companyDto)
 				.collect(Collectors.toList());
-						.map(this::companyDto)
-						.collect(Collectors.toList());
 
 		return ResponseEntity.ok(companyDto);
 	}

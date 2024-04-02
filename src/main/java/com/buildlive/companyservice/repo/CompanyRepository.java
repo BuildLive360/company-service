@@ -18,5 +18,9 @@ public interface CompanyRepository extends JpaRepository<Company, UUID> {
 
     List<Company> getByOwner(UUID id);
 
+    // Find companies where a PartyMember with the given email is present
+    @Query("SELECT DISTINCT c FROM Company c JOIN c.party p JOIN p.members pm WHERE pm.party_email = :email")
+    List<Company> findByPartyMemberEmail(@Param("email") String email);
+
 
 }
