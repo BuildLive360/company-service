@@ -17,4 +17,6 @@ public interface CompanyService {
 	List<Company> getAllByUser(UUID id);
 	ResponseEntity<List<CompanyDto>> findOtherCompanies(String email);
 
+	ResponseEntity<List<CompanyDto>> findOtherCompanies(String email);
+
 }

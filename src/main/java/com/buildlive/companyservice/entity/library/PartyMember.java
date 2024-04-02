@@ -1,5 +1,6 @@
 package com.buildlive.companyservice.entity.library;
 
+import com.buildlive.companyservice.entity.enums.CompanyRole;
 import com.buildlive.companyservice.entity.enums.PartyType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
@@ -29,6 +30,9 @@ public class PartyMember {
     @JsonBackReference
     @JoinColumn(name = "party_id")
     private Party party;
+
+    @Enumerated(EnumType.STRING)
+    private CompanyRole companyRole;
 
 
 

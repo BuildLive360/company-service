@@ -1,5 +1,6 @@
 package com.buildlive.companyservice.dto;
 
+import com.buildlive.companyservice.entity.enums.CompanyRole;
 import com.buildlive.companyservice.entity.enums.PartyType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,4 +20,5 @@ public class PartyDto {
     private String party_phone;
     private String party_email;
     private PartyType partyType;
+    private CompanyRole companyRole;
 }

@@ -3,6 +3,7 @@ package com.buildlive.companyservice.service;
 import com.buildlive.companyservice.dto.PartyDto;
 import com.buildlive.companyservice.dto.PartyResponse;
 import com.buildlive.companyservice.dto.PartyRetrieval;
+import com.buildlive.companyservice.entity.company.Company;
 import com.buildlive.companyservice.entity.library.PartyMember;
 import org.springframework.http.ResponseEntity;
 
@@ -18,6 +19,8 @@ public interface PartyService {
     boolean checkMethod(String email,UUID id);
 
    ResponseEntity<List<PartyRetrieval>> getAllPartyMembersOfCompany(UUID companyId);
+
+   ResponseEntity<List<Company>> getOtherCompaniesOfUser(String email);
 
 
 

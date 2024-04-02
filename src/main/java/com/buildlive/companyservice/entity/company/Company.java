@@ -7,6 +7,7 @@ import java.util.UUID;
 import com.buildlive.companyservice.entity.BankAccount;
 import com.buildlive.companyservice.entity.enums.CompanyRole;
 import com.buildlive.companyservice.entity.library.Party;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -54,6 +55,7 @@ public class Company {
 
 
 	@OneToOne
+	@JsonIgnore
 	@JoinColumn(name = "party_id")
 	private Party party;
 

@@ -1,15 +1,14 @@
 package com.buildlive.companyservice.service.impl;
 
-import com.buildlive.companyservice.entity.enums.CompanyRole;
-import com.buildlive.companyservice.repo.CompanyRepository;
-import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-
 import com.buildlive.companyservice.dto.CompanyDto;
 import com.buildlive.companyservice.entity.company.Company;
+import com.buildlive.companyservice.entity.enums.CompanyRole;
+import com.buildlive.companyservice.repo.CompanyRepository;
 import com.buildlive.companyservice.service.CompanyService;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,16 +16,41 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
-
 public class CompanyServiceImpl implements CompanyService {
 
+	
 
 	private final CompanyRepository companyRepository;
 	private final ModelMapper modelMapper;
 
+	@Autowired
+	public CompanyServiceImpl(ModelMapper modelMapper){
+		this.modelMapper = modelMapper;
+	}
+
+	 @Autowired
+	 CompanyRepository companyRepository;
 
 
+
+
+
+//	@Override
+//	public Company createCompany(Company request) {
+//		Company company = Company.builder()
+//				.companyName(request.getCompanyName())
+//				.cityName(request.getCityName())
+//				.address(request.getAddress())
+//				.phoneNumber(request.getPhoneNumber())
+//				.GSTNumber(request.getGSTNumber())
+//				.PANNumber(request.getPANNumber())
+//				.owner(request.getOwner())
+//				.companyRole(CompanyRole.OWNER)
+//				.companyIsNotPresent(false)
+//				.build();
+//		Company savedCompany = companyRepository.save(company);
+//		return savedCompany;
+//	}
 
 	@Override
 	public Company createCompany(Company request) {
@@ -82,6 +106,8 @@ public class CompanyServiceImpl implements CompanyService {
 		List<CompanyDto> companyDto = companies.stream()
 				.map(this::companyDto)
 				.collect(Collectors.toList());
+						.map(this::companyDto)
+						.collect(Collectors.toList());
 
 		return ResponseEntity.ok(companyDto);
 	}
