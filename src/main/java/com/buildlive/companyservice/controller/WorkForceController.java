@@ -5,10 +5,10 @@ import com.buildlive.companyservice.service.impl.WorkForceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.NoSuchElementException;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/company")
@@ -27,5 +27,24 @@ public class WorkForceController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed");
         }
 
+    }
+
+    @GetMapping("/{companyId}/get-workforce")
+    public ResponseEntity<?> getWorkForceOfACompany(@PathVariable(name = "companyId") UUID companyId){
+        return ResponseEntity.ok(workForceService.findByCompany(companyId));
+    }
+
+    @DeleteMapping("/{workerId}/delete")
+    public ResponseEntity<?> deleteWorkforce(@PathVariable(name = "workerId") UUID workerId){
+        try {
+            workForceService.deleteWorkforce(workerId);
+            return ResponseEntity.ok().build();
+        }
+        catch (NoSuchElementException e){
+            return ResponseEntity.notFound().build();
+        }
+        catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }

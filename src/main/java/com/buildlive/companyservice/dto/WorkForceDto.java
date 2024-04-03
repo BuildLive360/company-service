@@ -11,7 +11,8 @@ import java.util.UUID;
 @AllArgsConstructor
 public class WorkForceDto {
 
+
     private UUID companyId;
-    private String partyType;
+    private String workerType;
     private Long salaryPerShift;
 }
