@@ -7,7 +7,9 @@ import java.util.UUID;
 import com.buildlive.companyservice.entity.BankAccount;
 import com.buildlive.companyservice.entity.enums.CompanyRole;
 import com.buildlive.companyservice.entity.library.Party;
+import com.buildlive.companyservice.entity.library.WorkForce;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -58,5 +60,9 @@ public class Company {
 	@JsonIgnore
 	@JoinColumn(name = "party_id")
 	private Party party;
+
+	@JsonManagedReference
+	@OneToMany(mappedBy = "company",cascade = CascadeType.ALL,orphanRemoval = true)
+	private List<WorkForce> workForces = new ArrayList<>();
 
 }
