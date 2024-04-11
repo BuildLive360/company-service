@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import com.buildlive.companyservice.entity.BankAccount;
 import com.buildlive.companyservice.entity.enums.CompanyRole;
+import com.buildlive.companyservice.entity.library.Material;
 import com.buildlive.companyservice.entity.library.Party;
 import com.buildlive.companyservice.entity.library.WorkForce;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -64,5 +65,9 @@ public class Company {
 	@JsonManagedReference
 	@OneToMany(mappedBy = "company",cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<WorkForce> workForces = new ArrayList<>();
+
+	@JsonManagedReference
+	@OneToMany(mappedBy = "company",cascade = CascadeType.ALL,orphanRemoval = true)
+	List<Material> materials = new ArrayList<>();
 
 }
