@@ -4,6 +4,7 @@ import com.buildlive.companyservice.dto.CompanyDto;
 import com.buildlive.companyservice.dto.MaterialDto;
 import com.buildlive.companyservice.entity.library.Material;
 import com.buildlive.companyservice.service.IMaterialService;
+import com.buildlive.companyservice.service.PartyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,9 @@ public class MaterialController {
 
     @Autowired
     IMaterialService materialService;
+
+    @Autowired
+    PartyService partyService;
 
     @PostMapping("{companyId}/add-material")
     public ResponseEntity<?> addMaterialToCompany(@PathVariable UUID companyId,
@@ -41,5 +45,14 @@ public class MaterialController {
     public ResponseEntity<List<Material>> getAllMaterialsOfACompany(@PathVariable(name = "companyId") UUID companyId){
         return ResponseEntity.ok(materialService.getMaterialsByCompanyId(companyId));
     }
+
+    @GetMapping("{companyId}/get-partyMember-name/{email}")
+    public String getPartyMemberName(@PathVariable String email, @PathVariable UUID companyId){
+        return partyService.getPartyMemberName(email,companyId);
+    }
+
+
+
+
 
 }

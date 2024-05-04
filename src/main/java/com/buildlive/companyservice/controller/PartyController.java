@@ -45,6 +45,11 @@ public class PartyController {
     }
 
 
+    @GetMapping("/{companyId}/get-partyMember-Id/{email}")
+    public String getPartyMemberId(@PathVariable String email,@PathVariable UUID companyId){
+        return String.valueOf(partyService.getPartyMemberId(email,companyId));
+    }
+
 
 
 }

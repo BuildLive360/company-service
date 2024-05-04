@@ -4,7 +4,6 @@ import com.buildlive.companyservice.dto.PartyDto;
 import com.buildlive.companyservice.dto.PartyResponse;
 import com.buildlive.companyservice.dto.PartyRetrieval;
 import com.buildlive.companyservice.entity.company.Company;
-import com.buildlive.companyservice.entity.library.PartyMember;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -21,6 +20,10 @@ public interface PartyService {
    ResponseEntity<List<PartyRetrieval>> getAllPartyMembersOfCompany(UUID companyId);
 
    ResponseEntity<List<Company>> getOtherCompaniesOfUser(String email);
+
+   String getPartyMemberName(String email,UUID companyId);
+
+   UUID getPartyMemberId(String email, UUID companyId);
 
 
 

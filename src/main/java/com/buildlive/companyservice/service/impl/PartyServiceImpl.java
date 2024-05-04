@@ -230,5 +230,32 @@ public class PartyServiceImpl  implements PartyService {
         return ResponseEntity.ok(companyList);
     }
 
+    @Override
+    public String getPartyMemberName(String email, UUID companyId) {
+        Company company = companyRepository.findById(companyId).get();
+
+        Party party = company.getParty();
+        for(PartyMember members: party.getMembers()){
+            if(members.getParty_email().equals(email)){
+                return members.getName();
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public UUID getPartyMemberId(String email, UUID companyId) {
+        Company company = companyRepository.findById(companyId).get();
+        Party party = company.getParty();
+        for(PartyMember members: party.getMembers()){
+            if(members.getParty_email().equals(email)){
+                return members.getId();
+            }
+        }
+
+        return null;
+    }
+
 
 }
