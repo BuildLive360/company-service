@@ -54,6 +54,7 @@ public class Company {
 	
 
 	@OneToMany(mappedBy = "company",cascade = CascadeType.ALL,orphanRemoval = true)
+	@Builder.Default
 	private List<BankAccount> accounts = new ArrayList<>();
 
 
@@ -64,10 +65,12 @@ public class Company {
 
 	@JsonManagedReference
 	@OneToMany(mappedBy = "company",cascade = CascadeType.ALL,orphanRemoval = true)
+	@Builder.Default
 	private List<WorkForce> workForces = new ArrayList<>();
 
 	@JsonManagedReference
 	@OneToMany(mappedBy = "company",cascade = CascadeType.ALL,orphanRemoval = true)
+	@Builder.Default
 	List<Material> materials = new ArrayList<>();
 
 }

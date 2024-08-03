@@ -23,6 +23,7 @@ public class Party {
 
     @OneToMany(mappedBy = "party",cascade = CascadeType.ALL,orphanRemoval = true)
     @JsonManagedReference
+    @Builder.Default
     private List<PartyMember> members = new ArrayList<>();
 
     @OneToOne
